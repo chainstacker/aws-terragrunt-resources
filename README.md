@@ -45,7 +45,7 @@ terragrunt apply
 └── terragrunt.hcl
 ```
 
-### Resources deploying
+## Resources deploying
 1. VPC
     a. Subnets
     b. Route Tables
@@ -77,3 +77,6 @@ terragrunt apply
     c. IAM User
     d. OIDC Provider
     e. OIDC Role
+
+## Future Scope 
+Add examples of remaining AWS resources

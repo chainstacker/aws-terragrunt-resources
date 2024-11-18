@@ -158,5 +158,21 @@ terragrunt destroy
 - OIDC Provider
 - OIDC Roles
 
-## Future Scope 
-Add examples of remaining AWS resources
+## Future Scope
+This repository is designed to grow and adapt with evolving infrastructure needs and emerging best practices. Below are some of the planned enhancements and potential areas of development:
+
+### Additional AWS Services
+Support for more AWS services such as:
+- Elastic Beanstalk
+- AWS Step Functions
+- AWS Glue for data workflows
+- Amazon MSK (Managed Streaming for Apache Kafka)
+
+### Monitoring and Alerting
+Integrate monitoring tools such as:
+- Amazon CloudWatch for metrics and logs.
+- AWS Config for compliance monitoring.
+- Integrations with third-party tools like Prometheus and Grafana.
+
+### Serverless Architecture Support
+Add support for deploying serverless applications using AWS Lambda and API Gateway.

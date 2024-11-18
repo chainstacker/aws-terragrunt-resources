@@ -46,37 +46,53 @@ terragrunt apply
 ```
 
 ## Resources deploying
-1. VPC
-    a. Subnets
-    b. Route Tables
-    d. Nat & IG Gateway
-2. ECR
-3. EKS
-    a. Cluster
-    b. Node Pool
-4. ALB
-    a. Target Groups
-5. EC2
-6. Autoscaling Ec2
-7. Cloudfront
-8. EFS
-9. S3
-10. RDS
-11. ECS Cluster
-12. ECS Services
-    a. Frontend Test ECS
-    b. Backend Test ECS
-    c. ECS on EC2 Example
-13. Security Groups
-    a. EC2
-    b. ALB
-    c. ECS
-14. IAM
-    a. Policy
-    b. Role
-    c. IAM User
-    d. OIDC Provider
-    e. OIDC Role
+## Resources Deployed
+
+### 1. Virtual Private Cloud (VPC)
+- Subnets
+- Route Tables
+- NAT Gateway
+- Internet Gateway
+
+### 2. Elastic Container Registry (ECR)
+
+### 3. Elastic Kubernetes Service (EKS)
+- Cluster
+- Node Pool
+
+### 4. Application Load Balancer (ALB)
+- Target Groups
+
+### 5. Elastic Compute Cloud (EC2)
+
+### 6. Auto Scaling for EC2
+
+### 7. Amazon CloudFront
+
+### 8. Elastic File System (EFS)
+
+### 9. Simple Storage Service (S3)
+
+### 10. Relational Database Service (RDS)
+
+### 11. Elastic Container Service (ECS)
+- ECS Cluster
+- ECS Services:
+  - Frontend Test ECS
+  - Backend Test ECS
+  - ECS on EC2 Example
+
+### 12. Security Groups
+- EC2
+- ALB
+- ECS
+
+### 13. Identity and Access Management (IAM)
+- Policies
+- Roles
+- IAM Users
+- OIDC Provider
+- OIDC Roles
 
 ## Future Scope 
 Add examples of remaining AWS resources

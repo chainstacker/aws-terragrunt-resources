@@ -4,23 +4,75 @@ P2P infra deployment repository
 
 ## Usage
 
-> This is for local development only.
+This repository is designed to deploy and manage various AWS resources using **Terragrunt**. Terragrunt is a wrapper around Terraform, so all Terraform commands work with Terragrunt. Below are the steps to utilize this repository effectively:
 
-### Installation
+### Prerequisites
+1. **Install Terraform**  
+   Ensure Terraform is installed. Follow the [official documentation](https://developer.hashicorp.com/terraform/downloads) to set it up.
+   
+2. **Install Terragrunt**  
+   Install Terragrunt, which simplifies working with Terraform. Refer to the [Terragrunt installation guide](https://terragrunt.gruntwork.io/docs/getting-started/install/).
 
+3. **AWS CLI**  
+   Install and configure the AWS CLI with appropriate credentials. Refer to the [AWS CLI setup guide](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).
+
+4. **Access to Terraform Backend (if applicable)**  
+   Ensure access to the S3 bucket or other backends used to store Terraform state.
+
+---
+
+### Steps to Use
+1. **Clone the Repository**
 ```bash
-brew install terragrunt
+   git clone https://github.com/shashwat0309/aws-terragrunt-resources.git
+   cd aws-terragrunt-resources
 ```
 
-### Terraform/Terragrunt Commands
+2. **Configure AWS Provider**
+Update your AWS profile and region in the terragrunt.hcl files (if not already set). Example:
+```hcl
+remote_state {
+  backend = "s3"
+  config = {
+    encrypt = true
+    bucket  = "Enter_Your_Terraform_State_Bucket"
+    region  = local.region
+    key = "${path_relative_to_include()}/terraform.tfstate"
+    dynamodb_table = "Enter_Your_Terraform_DynamoDB_Table"
+  }
+  generate = {
+    path      = "backend.tf"
+    if_exists = "overwrite_terragrunt"
+  }
+}
+```
 
-Terragrunt is a wrapper around Terraform, so all Terraform commands work with Terragrunt.
+3. **Initialize Terragrunt** Navigate to the directory containing the terragrunt.hcl file for the resource you wish to deploy. Run:
 
-```bash
+```hcl
 terragrunt init
+```
+
+4. **Plan the Deployment**
+Review the changes to be applied by running:
+
+```hcl
 terragrunt plan
+```
+
+5. **Apply the Changes**
+Deploy the resources by running:
+
+```hcl
 terragrunt apply
 ```
+
+6. **Destroy the Resources**
+To clean up the resources, use:
+```hcl
+terragrunt destroy
+```
+
 
 ## Repository structure
 

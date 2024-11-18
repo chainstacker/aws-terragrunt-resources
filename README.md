@@ -57,7 +57,7 @@ terragrunt apply
 4. ALB
     a. Target Groups
 5. EC2
-6. Autoscalling Ec2
+6. Autoscaling Ec2
 7. Cloudfront
 8. EFS
 9. S3

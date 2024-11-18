@@ -1,6 +1,19 @@
 # Terragrunt
 
-P2P infra deployment repository 
+This repository contains a collection of modular and reusable Terragrunt configurations for deploying and managing a wide range of AWS resources. It simplifies the management of infrastructure as code (IaC) by leveraging Terragrunt to enhance Terraform's capabilities, including state management and module composition.
+
+### Features
+Comprehensive Resource Coverage: Includes VPC, EKS, ECS, ALB, RDS, EC2, CloudFront, and more.
+Modular Structure: Each resource is encapsulated in its own module, allowing for easy reuse and customization.
+Scalability and Automation: Supports scalable and automated infrastructure deployment.
+Best Practices: Follows AWS and IaC best practices for security, reliability, and maintainability.
+
+### Use Cases
+Provisioning cloud resources for production-ready environments.
+Setting up scalable Kubernetes clusters using Amazon EKS.
+Managing multi-tier applications with ALB, ECS, and RDS.
+Automating CI/CD pipelines with ECR, EC2, and S3 integrations.
+Building secure and highly available architectures.
 
 ## Usage
 
@@ -97,7 +110,6 @@ terragrunt destroy
 └── terragrunt.hcl
 ```
 
-## Resources deploying
 ## Resources Deployed
 
 ### 1. Virtual Private Cloud (VPC)

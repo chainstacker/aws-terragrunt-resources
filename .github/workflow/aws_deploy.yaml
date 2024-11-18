@@ -1,0 +1,84 @@
+name: AWS Deploy
+
+# on:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - 'config/**/*.yaml'
+#       - 'aws/**/*.hcl'
+#       - 'aws/**/*.tf'
+#       - 'aws/**/*.tfvars'
+#       - terragrunt.hcl
+
+jobs:
+  deploy:
+    name: Apply AWS changes
+
+    runs-on: ubuntu-latest
+
+    env:
+      tf_version: 1.9.7
+      tg_version: 0.68.1
+      tm_version: 0.10.7
+      working_dir: aws
+
+      AWS_REGION: eu-central-1
+      # Set these environment variables with GitHub secrets or reusable variables
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "${{ env.tf_version }}"
+          terraform_wrapper: false
+
+      - name: Install Terragrunt
+        run: |
+          wget https://github.com/gruntwork-io/terragrunt/releases/download/v${{ env.tg_version }}/terragrunt_linux_amd64 -O terragrunt
+          chmod +x terragrunt
+          install terragrunt /usr/local/bin/terragrunt && rm terragrunt
+          terragrunt --version
+
+      - name: Configure AWS credentials
+        if: steps.list.outputs.stdout
+        env:
+          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ env.AWS_SESSION_TOKEN }}
+        run: aws configure set region $AWS_REGION
+
+      - name: Verify AWS credentials
+        if: steps.list.outputs.stdout
+        run: aws sts get-caller-identity
+
+      - name: Init Terragrunt in changed stacks
+        if: steps.list.outputs.stdout
+        run: |
+            terragrunt init -lock-timeout=5m
+
+      - name: Plan Terragrunt in changed stacks
+        if: steps.list.outputs.stdout
+        id: plan
+        run: |
+            terragrunt plan -out out.tfplan -lock=false
+
+      - name: Apply Terragrunt in changed stacks
+        if: steps.list.outputs.stdout
+        id: apply
+        run: |
+            terragrunt apply -input=false -auto-approve out.tfplan

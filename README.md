@@ -37,7 +37,7 @@ This repository is designed to deploy and manage various AWS resources using **T
 ### Steps to Use
 1. **Clone the Repository**
 ```bash
-   git clone https://github.com/shashwat0309/aws-terragrunt-resources.git
+   git clone https://github.com/chainstacker/aws-terragrunt-resources.git
    cd aws-terragrunt-resources
 ```
 

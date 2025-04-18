@@ -9,7 +9,7 @@ include "iam" {
 inputs = {
   # Replace with your GitHub organization/repository details
   name = "test-github-oidc-role"
-  subjects = ["repo:Shashwatorg/*"] #Add your organisation or repository name
+  subjects = ["repo:chainstackerorg/*"] #Add your organisation or repository name
 
   # Attach the S3 ReadOnly policy to the IAM role
     policies = {

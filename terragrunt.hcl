@@ -21,7 +21,7 @@ remote_state {
   backend = "s3"
   config = {
     encrypt = true
-    bucket  = "shashwat-terraform-bucket"
+    bucket  = "chainstacker-terraform-bucket"
     region  = local.region
     key = "${path_relative_to_include()}/terraform.tfstate"
     dynamodb_table = "terraform-locks-table"
